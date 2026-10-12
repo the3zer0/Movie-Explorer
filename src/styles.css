@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply m-0 bg-night font-sans text-ink; }
+  button, input { font: inherit; }
+}
+
+@layer components {
+  .show-card { animation: card-in .45s both; animation-delay: var(--delay); }
+  .skeleton-shimmer {
+    animation: shimmer 1.3s infinite;
+    background: linear-gradient(90deg, #151517 25%, #202022 50%, #151517 75%);
+    background-size: 200% 100%;
+  }
+  .site-header { @apply absolute left-0 top-0 z-10 flex h-[84px] w-full items-center justify-between px-[6vw]; }
+  .logo { @apply flex items-center gap-[9px] text-[17px] font-bold tracking-[-.04em]; }
+  .logo > span:last-child span { @apply text-accent; }
+  .logo-mark { @apply flex h-7 w-7 rotate-[-8deg] items-center justify-center rounded-full bg-accent font-display text-lg text-night; }
+  .main-nav { @apply ml-[70px] flex gap-[34px]; }
+  .main-nav a { @apply text-xs uppercase tracking-[.08em] text-[#aaa8a3] transition-colors hover:text-ink; }
+  .header-button { @apply border border-white/20 bg-black/15 px-[19px] py-[13px] text-xs font-medium text-ink transition hover:border-accent hover:bg-accent hover:text-white; }
+  .primary-button { @apply inline-flex items-center gap-5 rounded-[3px] border border-white/20 bg-[#f0ede6] py-[10px] pl-[19px] pr-[10px] text-[11px] font-semibold tracking-[.02em] text-night shadow-[0_12px_34px_rgba(0,0,0,.22)] transition duration-200 hover:-translate-y-0.5 hover:border-white/50 hover:bg-white; }
+  .header-button span { @apply ml-3 text-accent; }
+  .primary-button span { @apply flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-accent text-[14px] text-white transition-transform duration-200; }
+  .primary-button:hover span { @apply translate-x-0.5 bg-[#c83b42]; }
+  .hero { @apply relative flex min-h-[700px] items-center overflow-hidden border-b border-white/10 bg-night px-[6vw] pb-[55px] pt-[100px]; background-image: linear-gradient(90deg, rgba(11,11,13,.98) 0%, rgba(11,11,13,.90) 27%, rgba(11,11,13,.58) 55%, rgba(11,11,13,.20) 100%), linear-gradient(0deg, rgba(11,11,13,.45), transparent 35%), url('/audience.jpg'); background-position: center 44%; background-size: cover; }
+  .hero-content { @apply relative z-[1] max-w-[590px]; }
+  .eyebrow { @apply mb-[25px] flex items-center gap-[10px] font-mono text-[10px] uppercase tracking-[.13em] text-accent; }
+  .eyebrow-line { @apply inline-block h-px w-7 bg-accent; }
+  h1, h2 { @apply m-0 font-sans leading-[.96] tracking-[-.065em]; }
+  h1 { @apply text-[clamp(52px,7vw,90px)]; }
+  h2 { @apply text-[clamp(42px,5vw,68px)]; }
+  h1 em, h2 em { @apply font-display font-semibold text-accent; }
+  .hero-copy { @apply my-7 max-w-[355px] text-[15px] leading-[1.7] text-[#bbb9b4]; }
+  .catalog-section { @apply bg-night px-[6vw] py-[120px]; }
+  .section-heading { @apply flex items-end justify-between; }
+  .section-intro { @apply max-w-[250px] text-[13px] leading-[1.7] text-muted; }
+  .catalog-toolbar { @apply my-[70px] mb-[35px] flex items-center justify-between border-b border-white/15 pb-[15px]; }
+  .search-wrap { @apply relative flex w-full max-w-[390px] items-center; }
+  .search-icon { @apply mr-3 rotate-[-20deg] text-[28px] leading-none text-accent; }
+  .search-wrap input { @apply w-full border-0 bg-transparent text-base text-ink outline-none placeholder:text-[#6d6c6b]; }
+  .search-shortcut { @apply border border-white/15 px-[7px] py-[5px] font-mono text-[10px] text-[#6d6c6b]; }
+  .clear-search { @apply mr-2 bg-transparent text-[22px] text-muted; }
+  .result-count { @apply font-mono text-[10px] uppercase text-[#73716d]; }
+  .show-grid { @apply grid grid-cols-4 gap-x-[18px] gap-y-[45px]; }
+  .poster-button { @apply relative block h-[340px] w-full overflow-hidden bg-panel p-0; }
+  .poster-button img { @apply h-full w-full object-cover transition duration-500; }
+  .poster-button:hover img { @apply scale-105 brightness-[.58]; }
+  .poster-overlay { @apply absolute inset-0 flex items-center justify-center gap-[9px] text-xs text-white opacity-0 transition-opacity; }
+  .poster-button:hover .poster-overlay { @apply opacity-100; }
+  .poster-overlay span { @apply text-[17px] text-accent; }
+  .card-info { @apply flex items-start justify-between gap-[10px] pt-[15px]; }
+  .card-info h3 { @apply mb-[6px] overflow-hidden text-[15px] font-semibold text-ellipsis whitespace-nowrap; }
+  .card-info p, .card-meta { @apply m-0 font-mono text-[9px] uppercase text-[#777571]; }
+  .rating { @apply whitespace-nowrap font-mono text-[11px]; }
+  .rating span, .modal-stats b { @apply text-accent; }
+  .card-meta { @apply mt-[13px] flex justify-between border-t border-white/15 pt-[9px]; }
+  .card-details { @apply mt-4 flex w-full items-center justify-between border border-white/15 px-3 py-[10px] text-[10px] uppercase tracking-[.08em] text-ink transition hover:border-accent hover:text-accent; }
+  .card-details span { @apply text-accent; }
+  .skeleton-card { @apply min-w-0; }
+  .skeleton-poster { @apply skeleton-shimmer h-[340px]; }
+  .skeleton-line { @apply skeleton-shimmer mt-4 h-[15px] w-[68%]; }
+  .skeleton-small { @apply skeleton-shimmer mt-[11px] h-[9px] w-[42%]; }
+  .status-message { @apply py-[55px] text-center text-sm text-muted; }
+  .status-message.error { @apply mb-[25px] border border-accent/30 p-5 text-accent; }
+  footer { @apply flex items-center justify-between border-t border-white/10 bg-[#080809] px-[6vw] py-8; }
+  footer > span { @apply font-mono text-[10px] text-[#73716d]; }
+  .modal-backdrop { @apply fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-5; }
+  .details-modal { @apply relative grid max-h-[90vh] w-full max-w-[760px] grid-cols-[.8fr_1.2fr] overflow-auto bg-panel shadow-[0_25px_90px_#000]; }
+  .modal-close { @apply absolute right-[17px] top-[10px] z-[1] bg-transparent text-[28px]; }
+  .modal-image { @apply min-h-[470px]; }
+  .modal-image img { @apply h-full w-full object-cover; }
+  .modal-body { @apply p-[65px_45px_45px]; }
+  .modal-body h2 { @apply mb-5; }
+  .modal-stats { @apply flex flex-wrap gap-[15px] border-y border-white/15 py-[15px] font-mono text-[10px] text-[#aaa8a3]; }
+  .summary { @apply my-[25px] text-sm leading-[1.7] text-[#b9b7b2]; }
+  .genre-list { @apply flex flex-wrap gap-[7px]; }
+  .genre-list span { @apply border border-white/15 px-[9px] py-[6px] font-mono text-[9px] uppercase text-muted; }
+  .modal-link { @apply mt-[30px] inline-block text-xs text-accent; }
+  .modal-link span { @apply ml-2; }
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  to { background-position: -200% 0; }
+}
+
+@media (max-width: 900px) {
+  .hero-art { @apply right-[5vw] top-[175px] h-[340px] w-[45%] opacity-75; }
+  .show-grid { @apply grid-cols-3; }
+  .poster-button, .skeleton-poster { @apply h-[300px]; }
+}
+
+@media (max-width: 640px) {
+  .site-header { @apply h-[70px] px-[5vw]; }
+  .main-nav { @apply hidden; }
+  .header-button { @apply px-3 py-[11px] text-[10px]; }
+  .hero { @apply min-h-[690px] items-end px-[5vw] pb-[70px] pt-[150px]; background-image: linear-gradient(90deg, rgba(11,11,13,.92), rgba(11,11,13,.67)), linear-gradient(0deg, rgba(11,11,13,.85), transparent 65%), url('/audience.jpg'); background-position: 56% center; }
+  .catalog-section { @apply px-[5vw] py-20; }
+  .section-heading { @apply block; }
+  .section-intro { @apply mt-6; }
+  .catalog-toolbar { @apply mt-[45px]; }
+  .search-shortcut { @apply hidden; }
+  .show-grid { @apply grid-cols-1 gap-x-3 gap-y-9; }
+  .poster-button, .skeleton-poster { @apply h-[250px]; }
+  .card-info { @apply block; }
+  .rating { @apply mt-2 block; }
+  .card-meta { @apply text-[8px]; }
+  footer { @apply flex-col items-start gap-4 px-[5vw] py-[28px]; }
+  .details-modal { @apply block max-h-[92vh]; }
+  .modal-image { @apply h-[240px] min-h-0; }
+  .modal-body { @apply p-[32px_25px_30px]; }
+}
