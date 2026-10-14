@@ -1,43 +1,114 @@
-# Cinemaza — Movie Explorer
+<div align="center">
 
-A responsive React app for browsing TVMaze shows, searching by title, and opening show details in a modal.
+# Cinemaza · Movie Explorer
+
+**Explore shows, search by title, and discover what to watch next.**
+
+[![React](https://img.shields.io/badge/React-18-149ECA?logo=react&logoColor=white)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+
+**[🌐 Live Demo](https://movie-explorer-sooty-eta.vercel.app) · [💻 Source Code](https://github.com/the3zer0/Movie-Explorer)**
+
+</div>
+
+---
+
+## Overview
+
+**Cinemaza** is a responsive TV-show discovery web app built with React and Vite. It fetches listings from the public **TVMaze API**, provides title-based search, and displays details in an interactive modal. Despite the project's "Movie Explorer" name, the upstream TVMaze API primarily catalogs television shows and series.
 
 ## Features
 
-- Home page with a hero section and navigation to the movie/show catalogue.
-- Dedicated `/movies` page with a debounced title search.
-- Responsive show cards with poster, name, year, rating, and a **See Details** action.
-- Details modal with summary, genres, rating, runtime, status, and TVMaze link.
-- Loading and error states, plus support for closing the modal with Escape or by clicking its backdrop.
+- A home page with a prominent hero section and a browsing CTA.
+- A dedicated `/movies` route for show discovery.
+- Debounced search by title to reduce unnecessary API requests.
+- Responsive show cards with posters, ratings, release years, and network information.
+- Detailed modal featuring summary, genres, runtime, status, ratings, and a TVMaze link.
+- Escape-key and backdrop-click modal dismissal.
+- Loading placeholders, empty search states, and API error messaging.
 
-## Built with
+## Tech stack
 
-- React and Vite
-- Tailwind CSS
-- [TVMaze API](https://www.tvmaze.com/api)
+| Category | Technology |
+| --- | --- |
+| Interface | React 18 |
+| Build tool | Vite 6 |
+| Language | JavaScript (JSX) |
+| Styling | Tailwind CSS 3 and CSS |
+| HTTP data | Native browser fetch |
+| Data source | [TVMaze API](https://www.tvmaze.com/api) |
+| Hosting | Vercel-compatible static deployment |
+
+### Dependencies
+
+As defined in [package.json](./package.json):
+
+- **Runtime dependencies:** `react`, `react-dom`, `vite`, and `@vitejs/plugin-react`.
+- **Development dependencies:** `tailwindcss`, `postcss`, and `autoprefixer`.
+
+The app uses the browser's built-in `fetch` API rather than an additional HTTP client.
 
 ## Run locally
 
-Requirements: Node.js and npm.
+**Prerequisites:** Node.js and npm.
 
 ```bash
+git clone https://github.com/the3zer0/Movie-Explorer.git
+cd Movie-Explorer
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. To create a production build, run:
+Open the URL displayed in the terminal (typically **http://localhost:5173**).
 
-```bash
-npm run build
+### Other commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start Vite development server |
+| `npm run build` | Generate production files in `dist/` |
+| `npm run preview` | Preview the production build locally |
+
+## Data API
+
+The project consumes TVMaze endpoints such as:
+
+```text
+https://api.tvmaze.com/shows
+https://api.tvmaze.com/search/shows?q=QUERY
 ```
 
-The app requests show data from TVMaze at runtime and needs an internet connection for live catalogue/search results and remote images.
+Show metadata and posters come from TVMaze, so internet access is required for fresh search results. The project is an independent demo and is not affiliated with TVMaze.
+
+## Project structure
+
+```text
+src/main.jsx        Main React UI and interactions
+src/styles.css      Custom project styling
+Public/             Source artwork used by the project
+index.html          Application HTML entry
+tailwind.config.js  Tailwind configuration
+vite.config.js      Vite configuration
+vercel.json         Deployment configuration
+package.json        Scripts and dependencies
+```
+
+> The source repository currently uses a capitalized `Public/` asset directory. On case-sensitive systems, check static asset path handling if any fallback images fail to load. This README does not change the source layout.
 
 ## Deployment
 
-Deploy the project as a Vite static site. Set the build command to `npm run build` and the output directory to `dist`. Configure the host to serve `index.html` for direct `/movies` visits.
+This is a Vite-based static app:
 
-Add the published repository and live deployment URLs here after publishing:
+1. Run `npm run build`.
+2. Publish the generated `dist/` directory.
+3. Configure the hosting provider to serve the SPA entry page for direct visits to `/movies`, if required.
 
-- GitHub repository: (https://github.com/the3zer0/Movie-Explorer)
+**Live site:** https://movie-explorer-sooty-eta.vercel.app
 
+## Author
+
+Built by [Md Rahat Mahmud](https://github.com/the3zer0).
+
+[Explore Cinemaza →](https://movie-explorer-sooty-eta.vercel.app)
